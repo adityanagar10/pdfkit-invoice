@@ -1,170 +1,218 @@
 const fs = require("fs");
-const PDFDocument = require("pdfkit");
+const PDFDocument = require("pdfkit-table");
+
+const tableJson = { 
+  "headers": [
+    { label:"SR No.", property:"srno", align: "center", headerAlign:"center", width: 45},
+    { label:"Item", property:"item", align: "center", headerAlign:"center", width: 180},
+    { label:"HSN/SAC", property:"hsnsac", align: "center", headerAlign:"center", width: 70},
+    { label:"Qty", property:"qty", align: "center", headerAlign:"center", width: 45},
+    { label:"Rate", property:"rate", align: "center", headerAlign:"center", width: 87},
+    { label:"CGST (9%)", property:"cgst", align: "center", headerAlign:"center", width: 87},
+    { label:"SGST (9%)", property:"sgst", align: "center", headerAlign:"center", width: 87},
+    { label:"Amount", property:"amount", align: "center", headerAlign:"center", width: 100}
+  ],
+  "datas": [
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }
+  ],
+};
 
 function createInvoice(invoice, path) {
-  let doc = new PDFDocument({ size: "A4", margin: 50 });
+  let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape' });
 
-  generateHeader(doc);
+  const options = {
+    x: 70, 
+    y: 185 + 20,
+    divider: {
+      header: {
+        disabled: false, 
+        width: 1, 
+        opacity: 1 
+      },
+      horizontal: { 
+        disabled: false, 
+        width: 1, 
+        opacity: 1 
+      },
+      vertical: {
+        disabled: false, 
+        width: 0.5, 
+        opacity: 0.5
+      }
+    },
+    padding: 5,
+    hideHeader: false, 
+    minRowHeight: 0,
+    prepareHeader: () => {
+      doc.font("Helvetica-Bold").fontSize(10)
+    },
+    prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
+      doc.font("Helvetica").fontSize(10);
+      indexColumn === -1 && doc.addBackground(rectRow, (indexRow % 2 ? '#F5F5F5' : '#FFFFFF'), 0.5);
+
+      const {x, y, width, height} = rectCell;
+
+      if(indexColumn === 0) {
+        doc
+          .lineWidth(1)
+          .moveTo(x, y)
+          .lineTo(x, y + height)
+          .stroke();  
+      }
+
+      doc
+        .lineWidth(1)
+        .moveTo(x + width, y)
+        .lineTo(x + width, y + height)
+        .stroke();
+    },
+  }
+
+  doc.rect(50, 25, 741, 525);
+  generateHeader(doc, invoice);
+  generateInvoiceDetails(doc, invoice);
   generateCustomerInformation(doc, invoice);
-  generateInvoiceTable(doc, invoice);
+  doc.table(tableJson, options);
   generateFooter(doc);
 
   doc.end();
   doc.pipe(fs.createWriteStream(path));
 }
 
-function generateHeader(doc) {
+function generateHeader(doc, invoice) {
+  var startPointOfText = 175;
+  var fontSize = 10;
+  var padding = 5;
+  var totalHeight = fontSize + padding;
+  var verticalStartForText = 50;
+  var horizontalMargin = 110;
   doc
-    .image("logo.png", 50, 45, { width: 50 })
+    .image("logo.jpg", 50, 45, { width: 100 })
     .fillColor("#444444")
-    .fontSize(20)
-    .text("ACME Inc.", 110, 57)
-    .fontSize(10)
-    .text("ACME Inc.", 200, 50, { align: "right" })
-    .text("123 Main Street", 200, 65, { align: "right" })
-    .text("New York, NY, 10025", 200, 80, { align: "right" })
+    .fontSize(fontSize)
+    .font('Helvetica-Bold')
+    .text(invoice.organization.name, startPointOfText, 35, { align: "left" })
+    .font('Helvetica')
+    .text(invoice.organization.address_line_one, startPointOfText, verticalStartForText + totalHeight * 0, { align: "left" })
+    .text(invoice.organization.address_line_two, startPointOfText, verticalStartForText + totalHeight * 1, { align: "left" })
+    .text(`${invoice.organization.city} - ${invoice.organization.zip_code}, ${invoice.organization.state}, ${invoice.organization.country}` , startPointOfText, verticalStartForText + totalHeight * 2, { align: "left" })
+    .text(`GSTIN ${invoice.organization.gst}`, startPointOfText, verticalStartForText + totalHeight * 3, { align: "left" })
+    .font('Helvetica-Bold')
+    .fontSize(12)
+    .text("TAX INVOICE", 650, 90, {align: "center"})
     .moveDown();
+  
+    generateHr(doc, horizontalMargin);
 }
 
-function generateCustomerInformation(doc, invoice) {
+function generateInvoiceDetails(doc, invoice) {
+  var prevHorizontalMargin = 110;
+  var startPointOfText = prevHorizontalMargin + 5;
+  var fontSize = 10;
+  var padding = 3;
+  var totalHeight = fontSize + padding;
+  var startPointOfCustomer = 400;
+  var verticalMargin = 25;
+  var verticalStartForText = 50;
+  var marginForData = 125;
   doc
-    .fillColor("#444444")
-    .fontSize(20)
-    .text("Invoice", 50, 160);
-
-  generateHr(doc, 185);
-
-  const customerInformationTop = 200;
-
-  doc
-    .fontSize(10)
-    .text("Invoice Number:", 50, customerInformationTop)
+    .fontSize(fontSize)
     .font("Helvetica-Bold")
-    .text(invoice.invoice_nr, 150, customerInformationTop)
+    .text("Invoice Details", verticalStartForText + verticalMargin, startPointOfText + totalHeight * 0)
     .font("Helvetica")
-    .text("Invoice Date:", 50, customerInformationTop + 15)
-    .text(formatDate(new Date()), 150, customerInformationTop + 15)
-    .text("Balance Due:", 50, customerInformationTop + 30)
-    .text(
-      formatCurrency(invoice.subtotal - invoice.paid),
-      150,
-      customerInformationTop + 30
-    )
-
+    .text("Invoice Number :", verticalStartForText + verticalMargin, startPointOfText + totalHeight * 1)
     .font("Helvetica-Bold")
-    .text(invoice.shipping.name, 300, customerInformationTop)
+    .text(invoice.invoice_number, verticalStartForText + verticalMargin + marginForData, startPointOfText + totalHeight * 1)
     .font("Helvetica")
-    .text(invoice.shipping.address, 300, customerInformationTop + 15)
-    .text(
-      invoice.shipping.city +
-        ", " +
-        invoice.shipping.state +
-        ", " +
-        invoice.shipping.country,
-      300,
-      customerInformationTop + 30
-    )
-    .moveDown();
+    .text("Invoice Date :", verticalStartForText + verticalMargin, startPointOfText + totalHeight * 2)
+    .font("Helvetica-Bold")
+    .text(invoice.invoice_date, verticalStartForText + verticalMargin + marginForData, startPointOfText + totalHeight * 2)
+    .font("Helvetica")
+    .text("Terms :", verticalStartForText + verticalMargin, startPointOfText + totalHeight * 3)
+    .font("Helvetica-Bold")
+    .text(invoice.invoice_terms, verticalStartForText + verticalMargin + marginForData, startPointOfText + totalHeight * 3)
+    .font("Helvetica")
+    .text("Due Date :", verticalStartForText + verticalMargin, startPointOfText + totalHeight * 4)
+    .font("Helvetica-Bold")
+    .text(invoice.invoice_due_date, verticalStartForText + verticalMargin + marginForData, startPointOfText + totalHeight * 4)
 
-  generateHr(doc, 252);
+    generateVr(doc, startPointOfCustomer, prevHorizontalMargin, startPointOfText + totalHeight * 5);
+    generateHr(doc, startPointOfText + totalHeight * 5);
 }
 
-function generateInvoiceTable(doc, invoice) {
-  let i;
-  const invoiceTableTop = 330;
-
-  doc.font("Helvetica-Bold");
-  generateTableRow(
-    doc,
-    invoiceTableTop,
-    "Item",
-    "Description",
-    "Unit Cost",
-    "Quantity",
-    "Line Total"
-  );
-  generateHr(doc, invoiceTableTop + 20);
-  doc.font("Helvetica");
-
-  for (i = 0; i < invoice.items.length; i++) {
-    const item = invoice.items[i];
-    const position = invoiceTableTop + (i + 1) * 30;
-    generateTableRow(
-      doc,
-      position,
-      item.item,
-      item.description,
-      formatCurrency(item.amount / item.quantity),
-      item.quantity,
-      formatCurrency(item.amount)
-    );
-
-    generateHr(doc, position + 20);
-  }
-
-  const subtotalPosition = invoiceTableTop + (i + 1) * 30;
-  generateTableRow(
-    doc,
-    subtotalPosition,
-    "",
-    "",
-    "Subtotal",
-    "",
-    formatCurrency(invoice.subtotal)
-  );
-
-  const paidToDatePosition = subtotalPosition + 20;
-  generateTableRow(
-    doc,
-    paidToDatePosition,
-    "",
-    "",
-    "Paid To Date",
-    "",
-    formatCurrency(invoice.paid)
-  );
-
-  const duePosition = paidToDatePosition + 25;
-  doc.font("Helvetica-Bold");
-  generateTableRow(
-    doc,
-    duePosition,
-    "",
-    "",
-    "Balance Due",
-    "",
-    formatCurrency(invoice.subtotal - invoice.paid)
-  );
-  doc.font("Helvetica");
+function generateCustomerInformation(doc, invoice) {  
+  var prevHorizontalMargin = 110;
+  var startPointOfText = prevHorizontalMargin + 5;
+  var fontSize = 10;
+  var padding = 3;
+  var totalHeight = fontSize + padding;
+  var startPointOfCustomer = 400;
+  var verticalMargin = 25;
+  var marginForData = 125;
+  doc
+    .fontSize(fontSize)
+    .font("Helvetica-Bold")
+    .text("Billed To", startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 0)
+    .font("Helvetica")
+    .text("Customer Name :", startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 1)
+    .font("Helvetica-Bold")
+    .text(invoice.customer.name, startPointOfCustomer + marginForData + verticalMargin, startPointOfText + totalHeight * 1)
+    .font("Helvetica")
+    .text("Contact :", startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 2)
+    .font("Helvetica-Bold")
+    .text(`${invoice.customer.email}, ${invoice.customer.phone}`, startPointOfCustomer + verticalMargin + marginForData, startPointOfText + totalHeight * 2)
+    .font("Helvetica")
+    .text(`${invoice.customer.address_line_one}, ${invoice.customer.address_line_two}, ${invoice.customer.city} - ${invoice.customer.zip_code}, ${invoice.customer.state}, ${invoice.customer.country}`, startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 3)
 }
 
 function generateFooter(doc) {
   doc
-    .fontSize(10)
+    .fontSize(8)
     .text(
-      "Payment is due within 15 days. Thank you for your business.",
-      50,
-      780,
-      { align: "center", width: 500 }
+      "Finkit is the Regd Trademark of NxtBig Software Labs Pvt Ltd.  All rights reserved. Terms and Conditions as given at our website www.finkit.in apply",
+      70,
+      535,
+      { align: "center", width: 700 }
     );
-}
-
-function generateTableRow(
-  doc,
-  y,
-  item,
-  description,
-  unitCost,
-  quantity,
-  lineTotal
-) {
-  doc
-    .fontSize(10)
-    .text(item, 50, y)
-    .text(description, 150, y)
-    .text(unitCost, 280, y, { width: 90, align: "right" })
-    .text(quantity, 370, y, { width: 90, align: "right" })
-    .text(lineTotal, 0, y, { align: "right" });
 }
 
 function generateHr(doc, y) {
@@ -172,7 +220,16 @@ function generateHr(doc, y) {
     .strokeColor("#aaaaaa")
     .lineWidth(1)
     .moveTo(50, y)
-    .lineTo(550, y)
+    .lineTo(791, y)
+    .stroke();
+}
+
+function generateVr(doc, y, a, b) {
+  doc
+    .strokeColor("#aaaaaa")
+    .lineWidth(1)
+    .moveTo(y, a)
+    .lineTo(y, b)
     .stroke();
 }
 
