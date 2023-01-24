@@ -3,14 +3,14 @@ const PDFDocument = require("pdfkit-table");
 
 const tableJson = { 
   "headers": [
-    { label:"SR No.", property:"srno", align: "center", headerAlign:"center", width: 45},
-    { label:"Item", property:"item", align: "center", headerAlign:"center", width: 180},
-    { label:"HSN/SAC", property:"hsnsac", align: "center", headerAlign:"center", width: 70},
-    { label:"Qty", property:"qty", align: "center", headerAlign:"center", width: 45},
-    { label:"Rate", property:"rate", align: "center", headerAlign:"center", width: 87},
-    { label:"CGST (9%)", property:"cgst", align: "center", headerAlign:"center", width: 87},
-    { label:"SGST (9%)", property:"sgst", align: "center", headerAlign:"center", width: 87},
-    { label:"Amount", property:"amount", align: "center", headerAlign:"center", width: 100}
+    { label:"SR No.", property:"srno", align: "left", headerAlign:"center", width: 45},
+    { label:"Item", property:"item", align: "left", headerAlign:"center", width: 180},
+    { label:"HSN/SAC", property:"hsnsac", align: "left", headerAlign:"center", width: 70},
+    { label:"Qty", property:"qty", align: "left", headerAlign:"center", width: 45},
+    { label:"Rate", property:"rate", align: "right", headerAlign:"center", width: 87},
+    { label:"CGST (9%)", property:"cgst", align: "right", headerAlign:"center", width: 87},
+    { label:"SGST (9%)", property:"sgst", align: "right", headerAlign:"center", width: 87},
+    { label:"Amount", property:"amount", align: "right", headerAlign:"center", width: 100}
   ],
   "datas": [
     { 
@@ -25,7 +25,7 @@ const tableJson = {
     },
     { 
       "srno":"2", 
-      "item":"CA Consultation", 
+      "item":"CA Consultation CA Consultation CA Consultation CA Consultation CA Consultation CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
       "rate": "1,499.00",
@@ -52,12 +52,230 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    }, { 
+      "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
   ],
 };
 
+var tableEndHeight = 0;;
+
 function createInvoice(invoice, path) {
-  let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape' });
+
+  let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape'}, { autoFirstPage: false });
+  doc.on('pageAdded', () =>  doc.fontSize(10).fillColor('black').text(2, 801, 555));
 
   const options = {
     x: 70, 
@@ -83,13 +301,17 @@ function createInvoice(invoice, path) {
     hideHeader: false, 
     minRowHeight: 0,
     prepareHeader: () => {
-      doc.font("Helvetica-Bold").fontSize(10)
+      doc
+        .font("Helvetica-Bold")
+        .fontSize(10)
     },
     prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
-      doc.font("Helvetica").fontSize(10);
+      doc.
+        font("Helvetica").fontSize(10);
       indexColumn === -1 && doc.addBackground(rectRow, (indexRow % 2 ? '#F5F5F5' : '#FFFFFF'), 0.5);
 
       const {x, y, width, height} = rectCell;
+      tableEndHeight = y;
 
       if(indexColumn === 0) {
         doc
@@ -112,6 +334,8 @@ function createInvoice(invoice, path) {
   generateInvoiceDetails(doc, invoice);
   generateCustomerInformation(doc, invoice);
   doc.table(tableJson, options);
+  generateTotalPaymentDetails(doc, invoice);
+  generateTotalBillingDetails(doc, invoice);
   generateFooter(doc);
 
   doc.end();
@@ -126,7 +350,7 @@ function generateHeader(doc, invoice) {
   var verticalStartForText = 50;
   var horizontalMargin = 110;
   doc
-    .image("logo.jpg", 50, 45, { width: 100 })
+    .image("logo.png", 50, 45, { width: 100 })
     .fillColor("#444444")
     .fontSize(fontSize)
     .font('Helvetica-Bold')
@@ -204,6 +428,129 @@ function generateCustomerInformation(doc, invoice) {
     .text(`${invoice.customer.address_line_one}, ${invoice.customer.address_line_two}, ${invoice.customer.city} - ${invoice.customer.zip_code}, ${invoice.customer.state}, ${invoice.customer.country}`, startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 3)
 }
 
+function convertCurrencyToWords(price) {
+  var sglDigit = ["Zero", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"],
+    dblDigit = ["Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"],
+    tensPlace = ["", "Ten", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety"],
+    handle_tens = function(dgt, prevDgt) {
+      return 0 == dgt ? "" : " " + (1 == dgt ? dblDigit[prevDgt] : tensPlace[dgt])
+    },
+    handle_utlc = function(dgt, nxtDgt, denom) {
+      return (0 != dgt && 1 != nxtDgt ? " " + sglDigit[dgt] : "") + (0 != nxtDgt || dgt > 0 ? " " + denom : "")
+    };
+
+  var str = "",
+    digitIdx = 0,
+    digit = 0,
+    nxtDigit = 0,
+    words = [];
+  if (price += "", isNaN(parseInt(price))) str = "";
+  else if (parseInt(price) > 0 && price.length <= 10) {
+    for (digitIdx = price.length - 1; digitIdx >= 0; digitIdx--) switch (digit = price[digitIdx] - 0, nxtDigit = digitIdx > 0 ? price[digitIdx - 1] - 0 : 0, price.length - digitIdx - 1) {
+      case 0:
+        words.push(handle_utlc(digit, nxtDigit, ""));
+        break;
+      case 1:
+        words.push(handle_tens(digit, price[digitIdx + 1]));
+        break;
+      case 2:
+        words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] && 0 != price[digitIdx + 2] ? " and" : "") : "");
+        break;
+      case 3:
+        words.push(handle_utlc(digit, nxtDigit, "Thousand"));
+        break;
+      case 4:
+        words.push(handle_tens(digit, price[digitIdx + 1]));
+        break;
+      case 5:
+        words.push(handle_utlc(digit, nxtDigit, "Lakh"));
+        break;
+      case 6:
+        words.push(handle_tens(digit, price[digitIdx + 1]));
+        break;
+      case 7:
+        words.push(handle_utlc(digit, nxtDigit, "Crore"));
+        break;
+      case 8:
+        words.push(handle_tens(digit, price[digitIdx + 1]));
+        break;
+      case 9:
+        words.push(0 != digit ? " " + sglDigit[digit] + " Hundred" + (0 != price[digitIdx + 1] || 0 != price[digitIdx + 2] ? " and" : " Crore") : "")
+    }
+    str = words.reverse().join("")
+  } else str = "";
+  return str
+
+}
+
+function currencyInWords(num) {
+  var splittedNum =num.toString().split('.')
+  var nonDecimal=splittedNum[0]
+  var decimal=splittedNum[1]
+  var value = convertCurrencyToWords(Number(nonDecimal))+"Indian Rupees and "+convertCurrencyToWords(Number(decimal))+" Paise"
+  value = value.slice(1)
+  return `${value} Only`
+}
+
+function generateTotalBillingDetails(doc, invoice) {
+  var verticalStart = 600;
+  var verticalMargin = 25;
+  var marginForData = 75;
+  var horizontalStart = tableEndHeight + 40;
+  var fontSize = 10;
+  var padding = 3;
+  var totalHeight = fontSize + padding;
+  doc
+    .fontSize(fontSize)
+    .font("Helvetica")
+    .text("Sub Total :", verticalStart + verticalMargin, horizontalStart + totalHeight * 0, {width: 150, align: "left"})
+    .text(formatCurrency(599600), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 0, {width: 150, align: "left"})
+
+    .font("Helvetica")
+    .text("CGST (9%) :", verticalStart + verticalMargin, horizontalStart + totalHeight * 1, {width: 150, align: "left"})
+    .text(formatCurrency(53964), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 1, {width: 150, align: "left"})
+    
+    .font("Helvetica")
+    .text("SGST (9%) :", verticalStart + verticalMargin, horizontalStart + totalHeight * 2, {width: 150, align: "left"})
+    .text(formatCurrency(53964), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 2, {width: 150, align: "left"})
+    
+    .font("Helvetica-Bold")
+    .text("Total :", verticalStart + verticalMargin, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
+    .text(formatCurrency(707528), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
+    
+    .font("Helvetica-Bold")
+    .text("Balance Due :", verticalStart + verticalMargin, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
+    .text(formatCurrency(707528), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
+
+    .fontSize(8)
+    .text("This is a Computer generated Invoice and requires no signature", 525, horizontalStart + totalHeight * 8, {width: 250, align: "left"})
+}
+
+function generateTotalPaymentDetails(doc, invoice) {
+  var fontSize = 10;
+  doc
+    .fontSize(fontSize)
+    .font("Helvetica")
+    .text(`Total Items : ${invoice.orders.total_items}`, {width: 500, align: "left"})
+    .text(" ")
+    .font("Helvetica")
+    .fontSize(8)
+    .text("Total In Words", {width: 550, align: "left"})
+    .font("Helvetica-BoldOblique")
+    .text(`${currencyInWords(7075.28)}`, {width: 500, align: "left"})
+    .font("Helvetica")
+    .text(" ")
+    .text("Thank you very much for choosing us. We deeply value our professional relationship with you.", {width: 500, align: "left"})
+    .text(" ")
+    .text("Payment Options", {
+      link: 'https://apple.com/',
+      underline: true,
+      color: 'blue',
+      target: '_blank',
+    })
+}
+
+
 function generateFooter(doc) {
   doc
     .fontSize(8)
@@ -233,16 +580,8 @@ function generateVr(doc, y, a, b) {
     .stroke();
 }
 
-function formatCurrency(cents) {
-  return "$" + (cents / 100).toFixed(2);
-}
-
-function formatDate(date) {
-  const day = date.getDate();
-  const month = date.getMonth() + 1;
-  const year = date.getFullYear();
-
-  return year + "/" + month + "/" + day;
+function formatCurrency(paise) {
+  return "Rs. " + (paise / 100).toFixed(2);
 }
 
 module.exports = {

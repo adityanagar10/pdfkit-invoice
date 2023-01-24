@@ -13,5 +13,8 @@
   "dependencies": {
     "pdfkit": "^0.13.0",
     "pdfkit-table": "^0.1.99"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
   }
 }
