@@ -25,7 +25,7 @@ const tableJson = {
     },
     { 
       "srno":"2", 
-      "item":"CA Consultation CA Consultation CA Consultation CA Consultation CA Consultation CA Consultation", 
+      "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
       "rate": "1,499.00",
@@ -64,7 +64,68 @@ const tableJson = {
       "amount": "1,499.00"
     },
     { 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+
+    { 
       "srno":"1", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -84,7 +145,27 @@ const tableJson = {
       "amount": "1,499.00"
     },
     { 
-      "srno":"1", 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -104,7 +185,27 @@ const tableJson = {
       "amount": "1,499.00"
     },
     { 
-      "srno":"1", 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -122,7 +223,38 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
+    },
+    { 
+      "srno":"2", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"3", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
+      "srno":"4", 
+      "item":"CA Consultation", 
+      "hsnsac": "9982", 
+      "qty":"1", 
+      "rate": "1,499.00",
+      "cgst": "134.91", 
+      "sgst": "134.91", 
+      "amount": "1,499.00"
+    },
+    { 
       "srno":"1", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
@@ -131,8 +263,9 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
+    },
+    { 
+      "srno":"2", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -140,8 +273,9 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
+    },
+    { 
+      "srno":"3", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -149,8 +283,9 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
+    },
+    { 
+      "srno":"4", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -158,8 +293,9 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
+    },
+    { 
+      "srno":"3", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -167,98 +303,9 @@ const tableJson = {
       "cgst": "134.91", 
       "sgst": "134.91", 
       "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
-      "item":"CA Consultation", 
-      "hsnsac": "9982", 
-      "qty":"1", 
-      "rate": "1,499.00",
-      "cgst": "134.91", 
-      "sgst": "134.91", 
-      "amount": "1,499.00"
-    }, { 
-      "srno":"1", 
+    },
+    { 
+      "srno":"4", 
       "item":"CA Consultation", 
       "hsnsac": "9982", 
       "qty":"1", 
@@ -274,8 +321,7 @@ var tableEndHeight = 0;;
 
 function createInvoice(invoice, path) {
 
-  let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape'}, { autoFirstPage: false });
-  doc.on('pageAdded', () =>  doc.fontSize(10).fillColor('black').text(2, 801, 555));
+  let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape', bufferPages: true});
 
   const options = {
     x: 70, 
@@ -329,15 +375,52 @@ function createInvoice(invoice, path) {
     },
   }
 
-  doc.rect(50, 25, 741, 525);
+  doc.rect(50, 25, 741, 155);
   generateHeader(doc, invoice);
   generateInvoiceDetails(doc, invoice);
   generateCustomerInformation(doc, invoice);
   doc.table(tableJson, options);
   generateTotalPaymentDetails(doc, invoice);
   generateTotalBillingDetails(doc, invoice);
-  generateFooter(doc);
 
+  let pages = doc.bufferedPageRange();
+  for (let i = 0; i < pages.count; i++) {
+    doc.switchToPage(i);
+
+    let oldBottomMargin = doc.page.margins.bottom;
+    doc.page.margins.bottom = 0;
+
+    doc
+      .font('Helvetica')
+      .text(
+        `Page: ${i + 1} of ${pages.count}`,
+        0,
+        555,
+        { align: 'center' })
+      .fontSize(8)
+      .text(
+        "Finkit is the Regd Trademark of NxtBig Software Labs Pvt Ltd.  All rights reserved. Terms and Conditions as given at our website www.finkit.in apply",
+        70,
+        570,
+        { align: "center", width: 700 });
+      
+      doc.page.margins.bottom = oldBottomMargin;
+      
+      let oldTopMargin = doc.page.margins.top;
+      doc.page.margins.top = 0 
+        
+      doc
+        .text(
+          `Page: ${i + 1} of ${pages.count}`,
+          0,
+          10,
+          { align: 'center' }
+          );
+        
+        doc.page.margins.top = oldTopMargin;
+  }
+
+  
   doc.end();
   doc.pipe(fs.createWriteStream(path));
 }
@@ -350,7 +433,7 @@ function generateHeader(doc, invoice) {
   var verticalStartForText = 50;
   var horizontalMargin = 110;
   doc
-    .image("logo.png", 50, 45, { width: 100 })
+    .image("logo.png", 60, 60, { width: 100 })
     .fillColor("#444444")
     .fontSize(fontSize)
     .font('Helvetica-Bold')
@@ -523,7 +606,7 @@ function generateTotalBillingDetails(doc, invoice) {
     .text(formatCurrency(707528), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
 
     .fontSize(8)
-    .text("This is a Computer generated Invoice and requires no signature", 525, horizontalStart + totalHeight * 8, {width: 250, align: "left"})
+    .text("This is a Computer generated Invoice and requires no signature", 525, horizontalStart + totalHeight * 7, {width: 250, align: "left"})
 }
 
 function generateTotalPaymentDetails(doc, invoice) {
@@ -542,24 +625,12 @@ function generateTotalPaymentDetails(doc, invoice) {
     .text(" ")
     .text("Thank you very much for choosing us. We deeply value our professional relationship with you.", {width: 500, align: "left"})
     .text(" ")
-    .text("Payment Options", {
+    .text("Click here for payment", {
       link: 'https://apple.com/',
       underline: true,
       color: 'blue',
       target: '_blank',
     })
-}
-
-
-function generateFooter(doc) {
-  doc
-    .fontSize(8)
-    .text(
-      "Finkit is the Regd Trademark of NxtBig Software Labs Pvt Ltd.  All rights reserved. Terms and Conditions as given at our website www.finkit.in apply",
-      70,
-      535,
-      { align: "center", width: 700 }
-    );
 }
 
 function generateHr(doc, y) {
