@@ -5,41 +5,125 @@ const writeJSONToFile = (json, fileName) => {
     
     fs.writeFile(fileName, jsonContent, 'utf8', function (err) {
         if (err) {
-            console.log("An error occured while writing JSON Object to File.");
-            return console.log(err);
+          throw err;
         }
     })
 }
 
-const compareItemsForUnitIndividualPriceList = (item, customItem) => {
+const checkForItemMatch = (item, customItem) => {
     return item.itemId === customItem.itemId
+}
+
+const getRange = (quantity, min, max) => {  
+  return (quantity >= min && quantity <= max) ? true : false
 }
 
 const updateListItemsFromUnitIndividualPriceList = (invoiceJSON) => {
     const listItems = invoiceJSON.listItems
     const priceList = invoiceJSON.priceList
     const updatedListItems = []
-    
+    let srnoCount = 1;
     listItems.map(item => {
         let priceListItem = priceList.customItemPrices.find(
-            priceListItem => compareItemsForUnitIndividualPriceList(item, priceListItem)
+            priceListItem => checkForItemMatch(item, priceListItem)
         )
         
         if(priceListItem) {
             updatedListItems.push({
                 ...item,
-                price: priceListItem.customPrice,
-                totalDiscount: priceListItem.totalDiscount * priceListItem.quantity
+                srno: srnoCount,
+                discountedPrice: priceListItem.customPrice,
+                discount: priceListItem.totalDiscount,
+                totalDiscount: priceListItem.totalDiscount * item.quantity
             })
         } else {
-            updatedListItems.push(item)
+            let newItem = {
+              ...item,
+              srno: srnoCount,
+              discountedPrice: item.price,
+              discount: 0,
+              totalDiscount: 0,
+            }
+            updatedListItems.push(newItem)
         }
+
+        srnoCount++;
     })
 
     invoiceJSON.listItems = updatedListItems
     calcTAX(invoiceJSON)
     writeJSONToFile(invoiceJSON, "invoice.json")
     return invoiceJSON
+}
+
+const updateListItemsFromFixedIndividualPriceList = (invoiceJSON) => {
+  const listItems = invoiceJSON.listItems
+  const priceList = invoiceJSON.priceList
+  const updatedListItems = []
+  let srnoCount = 1;
+
+  listItems.map(item => {
+    
+    let disc = Math.min(item.price * (priceList.fixedPercentage / 100), priceList.maximumDiscountPerItem)
+
+    updatedListItems.push({
+      ...item,
+      srno: srnoCount,
+      discountedPrice: item.price - disc,
+      discount: disc,
+      totalDiscount: disc * item.quantity
+    })
+
+    srnoCount++;
+  })
+
+  invoiceJSON.listItems = updatedListItems
+  calcTAX(invoiceJSON)
+  writeJSONToFile(invoiceJSON, "invoice.json")
+  return invoiceJSON
+} 
+
+const updateListItemsFromBulkIndividualPriceList = (invoiceJSON) => {
+  const listItems = invoiceJSON.listItems
+  const priceList = invoiceJSON.priceList
+  const updatedListItems = []
+  let srnoCount = 1;
+  
+  listItems.map(item => {
+      let x = priceList.customItemPrices.find(
+        priceListItem => checkForItemMatch(item, priceListItem)
+      )
+
+      let range = x && x.ranges.find(
+        range => getRange(item.quantity, range.minQuantity, range.maxQuantity)
+      )
+
+      if(range) {
+        updatedListItems.push({
+            ...item,
+            srno: srnoCount,
+            discountedPrice: range.customPrice,
+            discount: range.totalDiscount,
+            totalDiscount: range.totalDiscount * item.quantity
+        })
+      } else {
+          let newItem = {
+            ...item,
+            srno: srnoCount,
+            discountedPrice: item.price,
+            discount: 0,
+            totalDiscount: 0,
+          }
+          updatedListItems.push(newItem)
+      }
+
+      srnoCount++;
+  })
+
+  invoiceJSON.listItems = updatedListItems
+  calcTAX(invoiceJSON)
+  writeJSONToFile(invoiceJSON, "invoice.json")
+  return invoiceJSON
 }
 
 const isIGST = (invoiceJSON) => {
@@ -53,15 +137,21 @@ const calcTAX = (invoiceJSON) => {
 const calcIGST = (invoiceJSON) => {
     const listItems = invoiceJSON.listItems
     listItems.map(item => {
-        item.igst = Math.round((item.price*item.quantity*item.tax/100) * 100  + Number.EPSILON) / 100
+      item.IGST = Math.round((item.discountedPrice*item.tax/100) * 100  + Number.EPSILON) / 100
+      item.totalTax = item.IGST
+      item.amount = Math.round((item.totalTax + item.discountedPrice) * 100  + Number.EPSILON) / 100
+      item.totalAmount = Math.round((item.amount * item.quantity) * 100  + Number.EPSILON) / 100
     })
 }
 
 const calcGST = (invoiceJSON) => {
     const listItems = invoiceJSON.listItems
     listItems.map(item => {
-        item.cgst = Math.round((item.price*item.quantity*item.tax/200) * 100  + Number.EPSILON) / 100
-        item.sgst = Math.round((item.price*item.quantity*item.tax/200) * 100 + Number.EPSILON) / 100
+        item.CGST = Math.round((item.discountedPrice*item.tax/200) * 100  + Number.EPSILON) / 100
+        item.SGST = Math.round((item.discountedPrice*item.tax/200) * 100  + Number.EPSILON) / 100
+        item.totalTax = item.CGST + item.SGST
+        item.amount = Math.round((item.totalTax + item.discountedPrice) * 100  + Number.EPSILON) / 100
+        item.totalAmount = Math.round((item.amount * item.quantity) * 100  + Number.EPSILON) / 100
     })
 }
 
@@ -73,27 +163,21 @@ const calcSubTotal = (items) => {
     return totalPayableAmount
 }
 
-const calcTotalTax = (invoiceJSON, items) => {
-    let totalTax = 0;
-    if(isIGST(invoiceJSON)) {
-        items.map(item => {
-            totalTax += (item.igst)
-        })
-    } else {
-        items.map(item => {
-            totalTax += (item.cgst + item.sgst)
-        })
-    }
-    return totalTax
+const calcTotalTax = (items) => {
+  let totalTax = 0;
+  items.map(item => {
+    totalTax += (item.totalTax*item.quantity)
+  })
+  return Math.round(totalTax * 100  + Number.EPSILON) / 100
 }
 
 const calcTotalDiscount = (items) => {
     let totalDiscountAmount = 0;
     items.map(item => {
-        totalDiscountAmount += item.totalDiscount*item.quantity
+        totalDiscountAmount += item.totalDiscount
     })
 
-    return totalPayableAmount
+    return totalDiscountAmount
 }
 
 const totalItems = (items) => {
@@ -104,8 +188,8 @@ const totalItems = (items) => {
     return totalItems
 }
 
-function formatCurrency(paise) {
-    return "Rs. " + (paise / 100).toFixed(2);
+function formatCurrency(INR) {
+    return "Rs. " + (INR);
 }
   
 function convertCurrencyToWords(price) {
@@ -216,11 +300,12 @@ module.exports = {
     updateListItemsFromUnitIndividualPriceList,
     calcSubTotal,
     calcTotalDiscount,
-    convertCurrencyToWords,
     currencyInWords,
     createHeaderAndFooter,
     isIGST,
     calcTotalTax,
     totalItems,
-    formatCurrency
+    formatCurrency,
+    updateListItemsFromBulkIndividualPriceList,
+    updateListItemsFromFixedIndividualPriceList
 }

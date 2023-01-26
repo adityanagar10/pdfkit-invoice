@@ -1,54 +1,46 @@
+const { isIGST } = require("./helper.js")
+
+const makeTableJSON = (invoice) => {
+  let data = {}
+  
+  if(isIGST(invoice)) {
+    data = {
+      "headers": [
+        { label:"SR No.", property:"srno", align: "left", headerAlign:"center", width: 30},
+        { label:"Item", property:"itemName", align: "left", headerAlign:"center", width: 110},
+        { label:"HSN/SAC", property:"hsnORSac", align: "left", headerAlign:"center", width: 70},
+        { label:"Quantity", property:"quantity", align: "left", headerAlign:"center", width: 60},
+        { label:"Item Price", property:"price", align: "right", headerAlign:"center", width: 60},
+        { label:"Discount Per Item", property:"discount", align: "right", headerAlign:"center", width: 60},
+        { label:"Discounted Price", property:"discountedPrice", align: "right", headerAlign:"center", width: 75},
+        { label:"IGST", property:"IGST", align: "right", headerAlign:"center", width: 60},
+        { label:"Item Price after Discount", property:"amount", align: "right", headerAlign:"center", width: 110},
+        { label:"Amount", property:"totalAmount", align: "right", headerAlign:"center", width: 80}
+      ],
+      "datas": invoice.listItems
+    }
+  } else {
+    data = {
+      "headers": [
+        { label:"SR No.", property:"srno", align: "left", headerAlign:"center", width: 30},
+        { label:"Item", property:"itemName", align: "left", headerAlign:"center", width: 75},
+        { label:"HSN/SAC", property:"hsnORSac", align: "left", headerAlign:"center", width: 60},
+        { label:"Quantity", property:"quantity", align: "left", headerAlign:"center", width: 60},
+        { label:"Item Price", property:"price", align: "right", headerAlign:"center", width: 60},
+        { label:"Discount Per Item", property:"discount", align: "right", headerAlign:"center", width: 70},
+        { label:"Discounted Price", property:"discountedPrice", align: "right", headerAlign:"center", width: 70},
+        { label:"CGST Per Item", property:"CGST", align: "right", headerAlign:"center", width: 70},
+        { label:"SGST Per Item", property:"SGST", align: "right", headerAlign:"center", width: 70},
+        { label:"Item Price after Discount", property:"amount", align: "right", headerAlign:"center", width: 100},
+        { label:"Amount", property:"totalAmount", align: "right", headerAlign:"center", width: 70}
+      ],
+      "datas": invoice.listItems
+    }
+  }
+
+  return data
+}
+
 module.exports = {
-    "headers": [
-      { label:"SR No.", property:"srno", align: "left", headerAlign:"center", width: 45},
-      { label:"Item", property:"item", align: "left", headerAlign:"center", width: 180},
-      { label:"HSN/SAC", property:"hsnsac", align: "left", headerAlign:"center", width: 70},
-      { label:"Qty", property:"qty", align: "left", headerAlign:"center", width: 45},
-      { label:"Rate", property:"rate", align: "right", headerAlign:"center", width: 87},
-      { label:"CGST (9%)", property:"cgst", align: "right", headerAlign:"center", width: 87},
-      { label:"SGST (9%)", property:"sgst", align: "right", headerAlign:"center", width: 87},
-      { label:"Amount", property:"amount", align: "right", headerAlign:"center", width: 100}
-    ],
-    "datas": [
-      { 
-        "srno":"1", 
-        "item":"CA Consultation", 
-        "hsnsac": "9982", 
-        "qty":"1", 
-        "rate": "1,499.00",
-        "cgst": "134.91", 
-        "sgst": "134.91", 
-        "amount": "1,499.00"
-      },
-      { 
-        "srno":"2", 
-        "item":"CA Consultation", 
-        "hsnsac": "9982", 
-        "qty":"1", 
-        "rate": "1,499.00",
-        "cgst": "134.91", 
-        "sgst": "134.91", 
-        "amount": "1,499.00"
-      },
-      { 
-        "srno":"3", 
-        "item":"CA Consultation", 
-        "hsnsac": "9982", 
-        "qty":"1", 
-        "rate": "1,499.00",
-        "cgst": "134.91", 
-        "sgst": "134.91", 
-        "amount": "1,499.00"
-      },
-      { 
-        "srno":"4", 
-        "item":"CA Consultation", 
-        "hsnsac": "9982", 
-        "qty":"1", 
-        "rate": "1,499.00",
-        "cgst": "134.91", 
-        "sgst": "134.91", 
-        "amount": "1,499.00"
-      }
-    ],
-  };
+  makeTableJSON,
+};

@@ -1,32 +1,88 @@
 const fs = require("fs");
 const PDFDocument = require("pdfkit-table");
-const tableJSON = require("./data");
-const tableConfig = require("./pdfkit-table-config");
-const { convertCurrencyToWords, 
-        calcSubTotal, 
+const { makeTableJSON } = require("./data");
+const { calcSubTotal, 
         calcTotalTax,
         currencyInWords,
         createHeaderAndFooter,
         isIGST,
         totalItems,
-        formatCurrency
-       } = require("./helper.js")
+        formatCurrency,
+        calcTotalDiscount
+      } = require("./helper.js")
 
 var tableEndHeight = 0;
 
 function createInvoice(invoice, path) {
   let doc = new PDFDocument({ size: "A4", margin: 50, layout : 'landscape', bufferPages: true});
+
+  const options = {
+    x: 70, 
+    y: 185 + 20,
+    divider: {
+      header: {
+        disabled: false, 
+        width: 1, 
+        opacity: 1 
+      },
+      horizontal: { 
+        disabled: false, 
+        width: 1, 
+        opacity: 1 
+      },
+      vertical: {
+        disabled: false, 
+        width: 0.5, 
+        opacity: 0.5
+      }
+    },
+    padding: 5,
+    hideHeader: false, 
+    minRowHeight: 0,
+    prepareHeader: () => {
+      doc
+        .font("Helvetica-Bold")
+        .fontSize(10)
+    },
+    prepareRow: (row, indexColumn, indexRow, rectRow, rectCell) => {
+      doc.
+        font("Helvetica").fontSize(10);
+      indexColumn === -1 && doc.addBackground(rectRow, (indexRow % 2 ? '#F5F5F5' : '#FFFFFF'), 0.5);
+
+      const {x, y, width, height} = rectCell;
+      tableEndHeight = y;
+
+      if(indexColumn === 0) {
+        doc
+          .lineWidth(1)
+          .moveTo(x, y)
+          .lineTo(x, y + height)
+          .stroke();  
+      }
+
+      doc
+        .lineWidth(1)
+        .moveTo(x + width, y)
+        .lineTo(x + width, y + height)
+        .stroke();
+    },
+  }
+
   const subTotal = calcSubTotal(invoice.listItems);
-  const totalTax = calcTotalTax(invoice, invoice.listItems);
+  const totalTax = calcTotalTax(invoice.listItems);
+  const totalDiscount = calcTotalDiscount(invoice.listItems);
+  const totalAmount = subTotal + totalTax;
   const itemQty = totalItems(invoice.listItems);
+
+  const data = makeTableJSON(invoice)
 
   doc.rect(50, 25, 741, 155);
   generateHeader(doc, invoice);
   generateInvoiceDetails(doc, invoice);
   generateCustomerInformation(doc, invoice);
-  doc.table(tableJSON, tableConfig);
-  generateTotalPaymentDetails(doc, invoice, itemQty, subTotal);
-  generateTotalBillingDetails(doc, invoice, subTotal, totalTax);
+  doc.table(data, options);
+  generateTotalPaymentDetails(doc, itemQty, totalAmount, totalDiscount);
+  generateTotalBillingDetails(doc, invoice, subTotal, totalTax, totalAmount, totalDiscount);
   createHeaderAndFooter(doc);
 
   doc.end();
@@ -116,10 +172,10 @@ function generateCustomerInformation(doc, invoice) {
     .font("Helvetica-Bold")
     .text(`${invoice.customerDetails.email}, ${invoice.customerDetails.phone}`, startPointOfCustomer + verticalMargin + marginForData, startPointOfText + totalHeight * 2)
     .font("Helvetica")
-    .text(`${invoice.customerDetails.address.addressLineOne}, ${invoice.customerDetails.address.addressLineTwo}, ${invoice.customerDetails.city} - ${invoice.customerDetails.zipCode}, ${invoice.customerDetails.state}, ${invoice.customerDetails.country}`, startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 3)
+    .text(`${invoice.customerDetails.address.addressLineOne}, ${invoice.customerDetails.address.addressLineTwo}, ${invoice.customerDetails.address.city} - ${invoice.customerDetails.address.zipCode}, ${invoice.customerDetails.address.state}, ${invoice.customerDetails.address.country}`, startPointOfCustomer + verticalMargin, startPointOfText + totalHeight * 3)
 }
 
-function generateTotalBillingDetails(doc, invoice, subTotal, totalTax) {
+function generateTotalBillingDetails(doc, invoice, subTotal, totalTax, totalAmount, totalDiscount) {
   var verticalStart = 600;
   var verticalMargin = 25;
   var marginForData = 75;
@@ -148,36 +204,38 @@ function generateTotalBillingDetails(doc, invoice, subTotal, totalTax) {
         .text("SGST :", verticalStart + verticalMargin, horizontalStart + totalHeight * 2, {width: 150, align: "left"})
         .text(formatCurrency(totalTax/2), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 2, {width: 150, align: "left"})
     }
+      doc
+        .font("Helvetica-Bold")
+        .text("Total :", verticalStart + verticalMargin, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
+        .text(formatCurrency(totalAmount), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
+        
+        .font("Helvetica-Bold")
+        .text("Balance Due :", verticalStart + verticalMargin, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
+        .text(formatCurrency(totalAmount), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
 
-    doc
-      .font("Helvetica-Bold")
-      .text("Total :", verticalStart + verticalMargin, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
-      .text(formatCurrency(707528), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 3, {width: 150, align: "left"})
-      
-      .font("Helvetica-Bold")
-      .text("Balance Due :", verticalStart + verticalMargin, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
-      .text(formatCurrency(707528), verticalStart + verticalMargin  + marginForData, horizontalStart + totalHeight * 4, {width: 150, align: "left"})
-
-      .fontSize(8)
-      .text("This is a Computer generated Invoice and requires no signature", 525, horizontalStart + totalHeight * 7, {width: 250, align: "left"})
+        .fontSize(8)
+        .text("This is a Computer generated Invoice and requires no signature", 525, horizontalStart + totalHeight * 7, {width: 250, align: "left"})
 }
 
-function generateTotalPaymentDetails(doc, invoice, totalItems, subTotal) {
-  var fontSize = 10;
+function generateTotalPaymentDetails(doc, totalItems, totalAmount, totalDiscount) {
+  var fontSize = 9;
   doc
     .fontSize(fontSize)
     .font("Helvetica")
     .text(`Total Items : ${totalItems}`, {width: 500, align: "left"})
     .text(" ")
+    .text(`Total Discount : ${formatCurrency(totalDiscount)}`,{width: 500, align: "left"})
+    .text(" ")
     .font("Helvetica")
-    .fontSize(8)
     .text("Total In Words", {width: 550, align: "left"})
+    .fontSize(8)
     .font("Helvetica-BoldOblique")
-    .text(`${currencyInWords(subTotal)}`, {width: 500, align: "left"})
+    .text(`${currencyInWords(totalAmount)}`, {width: 500, align: "left"})
     .font("Helvetica")
     .text(" ")
     .text("Thank you very much for choosing us. We deeply value our professional relationship with you.", {width: 500, align: "left"})
     .text(" ")
+    .fontSize(fontSize)
     .text("Click here for payment", {
       link: 'https://apple.com/',
       underline: true,

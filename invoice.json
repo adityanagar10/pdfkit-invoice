@@ -49,100 +49,76 @@
     "id": "411433f8-5aa4-4015-8d15-c6efb53dc684",
     "name": "Default Price List",
     "description": "Default Price List",
-    "priceListType": "UNIT",
+    "priceListType": "FIXED",
     "canBeUsedByAllCustomers": true,
     "createdTime": "2023-01-13 14:23:35.991",
     "updatedAt": null,
     "activatesAt": "2023-01-13 14:23:35.991",
     "expiresAt": "2023-01-13 14:23:35.991",
+    "fixedPercentage": 15,
+    "maximumDiscountPerItem": 300,
     "couponName": [
       {
         "id": "411433f8-5aa4-4015-8d15-c6efb53dc688",
         "name": "DIWALI20",
         "description": "20% off on all items",
-        "unitPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684",
-        "bulkPriceListId": null,
+        "unitPriceListId": null,
+        "bulkPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684",
         "fixedPriceListId": null
-      }
-    ],
-    "customItemPrices": [
-      {
-        "customItemPriceId": "d50e009b-c022-4f95-9fd0-840cd73f94f5",
-        "itemId": "ITEM-1",
-        "discountPercent": 20,
-        "customPrice": 9599.2,
-        "totalDiscount": 2399.8,
-        "unitIndividualPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684"
-      },
-      {
-        "customItemPriceId": "d50e009b-c022-4f95-9fd0-840cd73f94f5",
-        "itemId": "ITEM-2",
-        "discountPercent": 15,
-        "customPrice": 4249.15,
-        "totalDiscount": 749.85,
-        "unitIndividualPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684"
-      },
-      {
-        "customItemPriceId": "d50e009b-c022-4f95-9fd0-840cd73f94f5",
-        "itemId": "ITEM-3",
-        "discountPercent": 10,
-        "customPrice": 899.1,
-        "totalDiscount": 99.9,
-        "unitIndividualPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684"
-      },
-      {
-        "customItemPriceId": "d50e009b-c022-4f95-9fd0-840cd73f94f5",
-        "itemId": "ITEM-5",
-        "discountPercent": 50,
-        "customPrice": 300,
-        "totalDiscount": 300,
-        "unitIndividualPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684"
-      },
-      {
-        "customItemPriceId": "d50e009b-c022-4f95-9fd0-840cd73f94f5",
-        "itemId": "ITEM-7",
-        "discountPercent": 75,
-        "customPrice": 250,
-        "totalDiscount": 1000,
-        "unitIndividualPriceListId": "411433f8-5aa4-4015-8d15-c6efb53dc684"
       }
     ]
   },
   "listItems": [
     {
       "itemId": "ITEM-1",
-      "quantity": 2,
-      "price": 9599.2,
-      "tax": 24,
+      "itemName": "Item 1",
+      "quantity": 5,
+      "hsnORSac": "998234",
+      "price": 12000,
+      "tax": 18,
       "orderId": "order-FINKIT-2023-01-13-19-37",
-      "totalDiscount": null,
-      "igst": 4607.62
+      "srno": 1,
+      "discountedPrice": 11700,
+      "discount": 300,
+      "totalDiscount": 1500,
+      "IGST": 2106,
+      "totalTax": 2106,
+      "amount": 13806,
+      "totalAmount": 69030
     },
     {
       "itemId": "ITEM-2",
-      "quantity": 3,
-      "price": 4249.15,
+      "itemName": "Item 2",
+      "quantity": 7,
+      "hsnORSac": "998235",
+      "price": 5000,
       "tax": 12,
       "orderId": "order-FINKIT-2023-01-13-19-37",
-      "totalDiscount": null,
-      "igst": 1529.69
+      "srno": 2,
+      "discountedPrice": 4700,
+      "discount": 300,
+      "totalDiscount": 2100,
+      "IGST": 564,
+      "totalTax": 564,
+      "amount": 5264,
+      "totalAmount": 36848
     },
     {
       "itemId": "ITEM-3",
-      "quantity": 1,
-      "price": 899.1,
+      "itemName": "Item 3",
+      "quantity": 6,
+      "hsnORSac": "998236",
+      "price": 1000,
       "tax": 5,
       "orderId": "order-FINKIT-2023-01-13-19-37",
-      "totalDiscount": null,
-      "igst": 44.96
-    },
-    {
-      "itemId": "ITEM-4",
-      "quantity": 7,
-      "price": 1199,
-      "tax": 18,
-      "orderId": "order-FINKIT-2023-01-13-19-37",
-      "igst": 1510.74
+      "srno": 3,
+      "discountedPrice": 850,
+      "discount": 150,
+      "totalDiscount": 900,
+      "IGST": 42.5,
+      "totalTax": 42.5,
+      "amount": 892.5,
+      "totalAmount": 5355
     }
   ]
 }
